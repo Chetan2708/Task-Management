@@ -5,7 +5,7 @@ const TaskSchema = new mongoose.Schema({
     description: { type: String },
     column: { type: String, required: true },
     dueDate: { type: Date },
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    // userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   });
   
-  module.exports = mongoose.model('Task', TaskSchema);
+  export default mongoose.model('Task', TaskSchema);

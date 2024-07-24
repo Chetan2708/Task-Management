@@ -43,9 +43,10 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(express.static("public"));
 
 // Routes Import
-// import userRouter from "./routes/user.routes.js";
+
+import taskRouter from "./routes/task.routes.js";
 
 // Routes Use
-// app.use("/api/v1/user", userRouter);
+app.use("/api/v1/task", taskRouter);
 
 export { app };
