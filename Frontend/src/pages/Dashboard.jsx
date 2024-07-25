@@ -1,5 +1,5 @@
 import React from 'react'
-import TaskColumns from '../components/TaskCoulumns'
+import TaskColumns from '../components/TaskColumns'
 import SearchBar from '../components/SearchBar'
 import AddTask from '../components/AddTask'
 
