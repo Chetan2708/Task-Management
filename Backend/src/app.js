@@ -51,7 +51,7 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(express.static("public"));
 
 // Routes Import
-import  authRoutes from "./routes/auth.routes.js"
+import authRoutes from "./routes/auth.routes.js"
 import taskRouter from "./routes/task.routes.js";
 
 // Routes Use

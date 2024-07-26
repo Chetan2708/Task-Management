@@ -50,7 +50,7 @@ const AddTaskModal = ({ isOpen, onClose }) => {
             </select>
             {errors.column && <p className="text-red-500">{errors.column.message}</p>}
           </div>
-          <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Submit</button>
+          <button type="submit" className="bg-primary text-white px-4 py-2 rounded">Submit</button>
           <button type="button" onClick={onClose} className="bg-gray-500 text-white px-4 py-2 rounded mt-2">Close</button>
         </form>
       </div>

@@ -1,13 +1,11 @@
 import { Router } from "express";
-
 import passport from "passport";
-import axios from "axios";
 import generateToken from "../utils/generateToken.js";
 import User from "../models/user.model.js";
 
 const router = Router();
 
-//authenticate the user using google
+// Authenticate the user using Google
 router.get(
   "/google/callback",
   passport.authenticate("google", {
@@ -15,41 +13,35 @@ router.get(
     failureRedirect: `${process.env.CLIENT_URL}/login/failed`,
   })
 );
+router.get("/check", async(req,res)=>{
+  res.send("hello")
+}
+)
 
-//forward the request to goggle's authentication server
-router.get("/google", async (req, res) => {
-  try {
-    const response = await axios.get(
-      "https://accounts.google.com/o/oauth2/v2/auth",
-      {
-        params: req.query,
-      }
-    );
-    res.send(response);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
+// Forward the request to Google's authentication server
+router.get("/google", passport.authenticate("google"));
 
-//register or login user to DB
+// Register or login user to DB
 router.get("/login/success", async (req, res) => {
   if (req.user) {
     const userExists = await User.findOne({ email: req.user.email });
+    let userId;
     if (userExists) {
       generateToken(res, userExists._id);
+      userId = userExists._id;
     } else {
       const newUser = new User({
         email: req.user.email,
-        password: Date.now(),
+        password: Date.now().toString(), // Use a string password for mongoose schema compatibility
       });
-      generateToken(res, newUser._id);
       await newUser.save();
+      generateToken(res, newUser._id);
+      userId = newUser._id;
     }
     res.status(200).json({
       user: { ...req.user },
-      message: "Succesfully logged in",
-      _id: userExists._id,
+      message: "Successfully logged in",
+      _id: userId,
     });
   } else {
     res.status(403).json({
@@ -58,13 +50,14 @@ router.get("/login/success", async (req, res) => {
   }
 });
 
-//login failed
+// Login failed
 router.get("/login/failed", (req, res) => {
-  res.status(401);
-  throw new Error("Login Failed");
+  res.status(401).json({
+    message: "Login Failed",
+  });
 });
 
-//logout
+// Logout
 router.get("/logout", (req, res) => {
   req.logout((err) => {
     if (err) {

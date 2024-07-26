@@ -59,7 +59,7 @@ const TaskCard = ({ task, index }) => {
                         Edit
                     </button>
                     <button
-                        className="bg-blue-500 text-white px-2 py-1 rounded"
+                        className="bg-primary text-white px-2 py-1 rounded"
                         onClick={() => {
                             setMode('view');
                             setShowModal(true);

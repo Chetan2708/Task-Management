@@ -51,7 +51,7 @@ const TaskDetailModel = ({ show, onClose, mode, task, handleSave }) => {
               </button>
               <button
                 type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded"
+                className="bg-primary text-white px-4 py-2 rounded"
               >
                 Save
               </button>
@@ -65,7 +65,7 @@ const TaskDetailModel = ({ show, onClose, mode, task, handleSave }) => {
             <div className="flex justify-end mt-4">
               <button
                 onClick={onClose}
-                className="bg-blue-500 text-white px-4 py-2 rounded"
+                className="bg-primary text-white px-4 py-2 rounded"
               >
                 Close
               </button>
