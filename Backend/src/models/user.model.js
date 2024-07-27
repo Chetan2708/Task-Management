@@ -2,7 +2,15 @@
 import mongoose from "mongoose"
 import bcrypt from "bcrypt" 
 import crypto from "crypto"
+import jwt from "jsonwebtoken"
 const userSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: [
+            true,
+            "Please add a name!"
+        ]
+    },
     email: {
         type: String,
         required: [
@@ -61,7 +69,8 @@ userSchema.methods.createPasswordResetToken = function () {
   
     return resetToken
   }
-  
+
+
 
 
 export default mongoose.model("User", userSchema)
